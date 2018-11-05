@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">RSS Feed</string>
+
+    <string name="read_more"><![CDATA[<u>Lire l\'article complet...</u>]]></string>
+</resources>
