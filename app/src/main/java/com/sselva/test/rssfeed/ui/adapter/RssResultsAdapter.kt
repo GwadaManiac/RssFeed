@@ -1,17 +1,17 @@
 package com.sselva.test.rssfeed.ui.adapter
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentPagerAdapter
-import android.support.v4.view.PagerAdapter
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
+import androidx.viewpager.widget.PagerAdapter
 import android.util.SparseArray
 
 import com.sselva.test.rssfeed.ui.fragment.RssResultsFragment
 
 import com.sselva.test.rssfeed.ui.fragment.RssResultsFragment.Companion.EXTRA_BUNDLE_POSITION
 
-class RssResultsAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
+class RssResultsAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
     private var mFragmentMap: SparseArray<Fragment>? = null
 
     private fun getResultsFragmentInstance(position: Int): Fragment {
@@ -22,7 +22,7 @@ class RssResultsAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
         return fragment
     }
 
-    override fun getItemPosition(`object`: Any?): Int {
+    override fun getItemPosition(`object`: Any): Int {
         return PagerAdapter.POSITION_NONE
     }
 
@@ -45,7 +45,6 @@ class RssResultsAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
     }
 
     companion object {
-
         private val PAGES = arrayOf("Une", "Techno", "Sport", "Immo", "Guides")
     }
 }

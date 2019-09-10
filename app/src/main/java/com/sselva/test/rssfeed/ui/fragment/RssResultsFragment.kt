@@ -2,9 +2,9 @@ package com.sselva.test.rssfeed.ui.fragment
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.DividerItemDecoration
-import android.support.v7.widget.LinearLayoutManager
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,9 +19,9 @@ class RssResultsFragment : Fragment() {
 
     private var mItemsAdapter: ChannelItemsAdapter? = null
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        val view = inflater!!.inflate(R.layout.rss_results_fragment, container, false)
+        val view = inflater.inflate(R.layout.rss_results_fragment, container, false)
 
         mItemsAdapter = ChannelItemsAdapter(object : ChannelItemsAdapter.OnChannelItemSelectedListener {
             override fun onChannelItemSelected(channelItem: ChannelItem) {

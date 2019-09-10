@@ -1,31 +1,36 @@
 package com.sselva.test.rssfeed.manager.model
 
-
 import org.simpleframework.xml.Element
 import org.simpleframework.xml.ElementList
 import org.simpleframework.xml.Root
-
+import java.io.Serializable
 import java.util.ArrayList
 
 
 @Root(name = "channel")
-class Channel {
+class Channel :Serializable  {
 
-    @Element
-    val title: String? = null
+    @set:Element
+    @get:Element
+    var title: String? = null
 
-    @Element
-    val description: String? = null
+    @set:Element
+    @get:Element
+    var description: String? = null
 
-    @Element
-    val copyright: String? = null
+    @set:Element
+    @get:Element
+    var copyright: String? = null
 
-    @Element
-    val pubDate: String? = null
+    @set:Element
+    @get:Element
+    var pubDate: String? = null
 
-    @Element
-    val image: ChannelImage? = null
+    @set:Element
+    @get:Element
+    var image: ChannelImage? = null
 
-    @ElementList(inline = true, name = "item")
-    val items: ArrayList<ChannelItem> = ArrayList()
+    @set:ElementList(inline = true, name = "item")
+    @get:ElementList(inline = true, name = "item")
+    var items: ArrayList<ChannelItem> = ArrayList()
 }

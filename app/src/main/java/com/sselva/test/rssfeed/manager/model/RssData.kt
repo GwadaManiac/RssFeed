@@ -7,7 +7,8 @@ import org.simpleframework.xml.Root
 @Root(name = "rss")
 class RssData {
 
-    @Element
+    @set:Element
+    @get:Element
     var channel: Channel? = null
 
     fun isEmpty() : Boolean {

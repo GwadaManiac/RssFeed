@@ -13,6 +13,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory
 
 import com.sselva.test.rssfeed.Constants.BASE_URL
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 class FeedManager {
@@ -42,7 +43,7 @@ class FeedManager {
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
                 .build()
 
-        internal var client = retrofit.create(FeedApi::class.java)
+        var client = retrofit.create(FeedApi::class.java)
 
         private var mInstance: FeedManager? = null
 
@@ -52,5 +53,20 @@ class FeedManager {
             }
             return mInstance
         }
+    }
+
+    fun getFeed(feedId: Int) :Observable<RssData> {
+        val observable: Observable<RssData>
+        when (feedId) {
+            0 -> observable = topNewsFeed
+            1 -> observable = technoFeed
+            2 -> observable = sportFeed
+            3 -> observable = immoFeed
+            4 -> observable = guidesAchatFeed
+            else -> observable = topNewsFeed
+        }
+        return observable
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
     }
 }

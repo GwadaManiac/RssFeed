@@ -3,10 +3,10 @@ package com.sselva.test.rssfeed.ui
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.text.Html
-import android.text.TextUtils
 import android.view.View.GONE
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.text.HtmlCompat
+import androidx.core.text.HtmlCompat.FROM_HTML_MODE_LEGACY
 import com.squareup.picasso.Picasso
 import com.sselva.test.rssfeed.R
 import com.sselva.test.rssfeed.manager.model.ChannelItem
@@ -28,21 +28,21 @@ class ChannelItemDetailsActivity : AppCompatActivity() {
 
     private fun bind(channelItem: ChannelItem) {
         supportActionBar!!.hide()
-        if (channelItem.enclosure != null && channelItem.enclosure.url != null) {
-            Picasso.get().load(Uri.parse(channelItem.enclosure.url)).into(mChannelItemImage)
+        if (!channelItem.enclosure?.url.isNullOrEmpty()) {
+            Picasso.get().load(Uri.parse(channelItem.enclosure?.url)).into(mChannelItemImage)
         } else {
             mChannelItemImage.visibility = GONE
         }
         mChannelItemTitle.text = channelItem.title
-        if (!TextUtils.isEmpty(channelItem.pubDate))
+        if (channelItem.pubDate.isNullOrEmpty())
             mChannelItemDate.text = channelItem.pubDate
-        if (!TextUtils.isEmpty(channelItem.description))
+        if (channelItem.description.isNullOrEmpty())
             mChannelItemDescription.text = channelItem.description
 
-        if (!TextUtils.isEmpty(channelItem.link)) {
-            mChannelItemMoreLink.text = Html.fromHtml(getString(R.string.read_more))
+        if (channelItem.link.isNullOrEmpty()) {
+            mChannelItemMoreLink.text = HtmlCompat.fromHtml(getString(R.string.read_more), FROM_HTML_MODE_LEGACY)
             mChannelItemMoreLink.setOnClickListener {
-                val intent = Intent(this@ChannelItemDetailsActivity, WebViewActivity.javaClass)
+                val intent = Intent(this@ChannelItemDetailsActivity, WebViewActivity::class.java)
                 intent.putExtra(EXTRA_WEB_URL, channelItem.link)
                 startActivity(intent)
             }
