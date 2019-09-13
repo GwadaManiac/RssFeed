@@ -26,10 +26,6 @@ class Channel :Serializable  {
     @get:Element
     var pubDate: String? = null
 
-    @set:Element
-    @get:Element
-    var image: ChannelImage? = null
-
     @set:ElementList(inline = true, name = "item")
     @get:ElementList(inline = true, name = "item")
     var items: ArrayList<ChannelItem> = ArrayList()

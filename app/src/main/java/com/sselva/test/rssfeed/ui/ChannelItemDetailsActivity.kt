@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View.GONE
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.HtmlCompat
+import androidx.core.text.HtmlCompat.FROM_HTML_MODE_COMPACT
 import androidx.core.text.HtmlCompat.FROM_HTML_MODE_LEGACY
 import com.squareup.picasso.Picasso
 import com.sselva.test.rssfeed.R
@@ -34,12 +35,12 @@ class ChannelItemDetailsActivity : AppCompatActivity() {
             mChannelItemImage.visibility = GONE
         }
         mChannelItemTitle.text = channelItem.title
-        if (channelItem.pubDate.isNullOrEmpty())
+        if (!channelItem.pubDate.isNullOrEmpty())
             mChannelItemDate.text = channelItem.pubDate
-        if (channelItem.description.isNullOrEmpty())
+        if (!channelItem.description.isNullOrEmpty())
             mChannelItemDescription.text = channelItem.description
 
-        if (channelItem.link.isNullOrEmpty()) {
+        if (!channelItem.link.isNullOrEmpty()) {
             mChannelItemMoreLink.text = HtmlCompat.fromHtml(getString(R.string.read_more), FROM_HTML_MODE_LEGACY)
             mChannelItemMoreLink.setOnClickListener {
                 val intent = Intent(this@ChannelItemDetailsActivity, WebViewActivity::class.java)

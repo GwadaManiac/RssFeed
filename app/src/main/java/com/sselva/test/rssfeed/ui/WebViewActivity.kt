@@ -37,7 +37,7 @@ class WebViewActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListene
     private inner class MyWebViewClient : WebViewClient() {
         override fun onPageFinished(view: WebView, url: String) {
             super.onPageFinished(view, url)
-            (mToolbarTitle as Toolbar).title = view.title
+            mToolbarTitle.text = view.title
             if (mSwipeRefreshLayout.isRefreshing) {
                 mSwipeRefreshLayout.isRefreshing = false
             }

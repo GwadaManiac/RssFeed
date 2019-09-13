@@ -1,15 +1,14 @@
 package com.sselva.test.rssfeed
 
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
+import android.view.View.GONE
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import androidx.viewpager.widget.ViewPager
-import com.squareup.picasso.Picasso
 import com.sselva.test.rssfeed.manager.FeedManager
 import com.sselva.test.rssfeed.manager.model.RssData
 import com.sselva.test.rssfeed.ui.adapter.RssResultsAdapter
@@ -104,9 +103,12 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
         if (!channel?.description.isNullOrEmpty()) {
             mChannelDescription.setText(channel?.description)
         }
-        if (!channel?.image?.url.isNullOrEmpty()) {
+        // Old RSS channel have an image - Keep it if come back
+        /*if (!channel?.image?.url.isNullOrEmpty()) {
             Picasso.get().load(Uri.parse(channel?.image?.url)).into(mChannelImage)
-        }
+        } else {
+            mChannelImage.visibility = GONE
+        }*/
         (mResultsAdapter!!.getItem(mPosition) as RssResultsFragment).setChannel(channel)
     }
 
